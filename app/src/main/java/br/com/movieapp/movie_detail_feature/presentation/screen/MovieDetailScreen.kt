@@ -18,26 +18,11 @@ import br.com.movieapp.ui.theme.white
 
 @Composable
 fun MovieDetailScreen(
-    id: Int?,
     uiState: MovieDetailState,
-    getMovieDetail: (MovieDetailEvent.GetMovieDetail) -> Unit,
     toggleFavorite: (movie: Movie) -> Unit,
-    checkedFavorite: (MovieDetailEvent.CheckedFavorite) -> Unit
 ) {
 
     val pagingMoviesSimilar = uiState.results.collectAsLazyPagingItems()
-
-    /*
-        Bloco de código dentro do LaunchedEffect será executado de forma assíncrona, a
-        chave key1=true significa que sempre que a MovieDetailScreen for chamada, o
-        LaunchedEffect será executado
-     */
-    LaunchedEffect(key1 = true) {
-        if (id != null) {
-            getMovieDetail(MovieDetailEvent.GetMovieDetail(id))
-            checkedFavorite(MovieDetailEvent.CheckedFavorite(id))
-        }
-    }
 
     Scaffold(
         topBar = {

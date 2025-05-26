@@ -68,15 +68,12 @@ fun NavigationGraph (
                     defaultValue = 0
                 }
             )
-        ) { navBackStackEntry ->
+        ) {
             val viewModel: MovieDetailViewModel = hiltViewModel()
 
             MovieDetailScreen(
                 uiState = viewModel.uiState,
-                id = navBackStackEntry.arguments?.getInt(Constants.MOVIE_DETAIL_ARGUMENT_KEY),
-                getMovieDetail = viewModel::getMovieDetail,
-                toggleFavorite = viewModel::toggleFavorite,
-                checkedFavorite = viewModel::checkedFavorite
+                toggleFavorite = viewModel::toggleFavorite
             )
 
         }
