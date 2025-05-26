@@ -10,6 +10,8 @@ import androidx.navigation.navArgument
 import br.com.movieapp.core.util.Constants
 import br.com.movieapp.movie_detail_feature.presentation.screen.MovieDetailScreen
 import br.com.movieapp.movie_detail_feature.presentation.viewmodel.MovieDetailViewModel
+import br.com.movieapp.movie_favorite_feature.presentation.MovieFavoriteScreen
+import br.com.movieapp.movie_favorite_feature.presentation.MovieFavoriteViewModel
 import br.com.movieapp.movie_popular_feature.presentation.screen.MoviePopularScreen
 import br.com.movieapp.movie_popular_feature.presentation.viewmodel.MoviePopularViewModel
 import br.com.movieapp.search_movie_feature.presentation.models.MovieSearchEvent
@@ -48,7 +50,14 @@ fun NavigationGraph (
         }
 
         composable(BottomNavItem.MovieFavorite.route) {
-
+            val viewModel: MovieFavoriteViewModel = hiltViewModel()
+            val uiState = viewModel.uiState
+            MovieFavoriteScreen(
+                uiState = uiState,
+                navigateToDetailMovie = {
+                    navController.navigate(BottomNavItem.MovieDetail.passMovieId(movieId = it))
+                }
+            )
         }
 
         composable(
@@ -59,13 +68,15 @@ fun NavigationGraph (
                     defaultValue = 0
                 }
             )
-        ) {
+        ) { navBackStackEntry ->
             val viewModel: MovieDetailViewModel = hiltViewModel()
 
             MovieDetailScreen(
                 uiState = viewModel.uiState,
-                id = it.arguments?.getInt(Constants.MOVIE_DETAIL_ARGUMENT_KEY),
-                getMovieDetail = viewModel::getMovieDetail
+                id = navBackStackEntry.arguments?.getInt(Constants.MOVIE_DETAIL_ARGUMENT_KEY),
+                getMovieDetail = viewModel::getMovieDetail,
+                toggleFavorite = viewModel::toggleFavorite,
+                checkedFavorite = viewModel::checkedFavorite
             )
 
         }
