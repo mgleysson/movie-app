@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import br.com.movieapp.core.presentation.navigation.BottomNavigationBar
+import br.com.movieapp.core.presentation.navigation.DetailScreenNav
 import br.com.movieapp.core.presentation.navigation.NavigationGraph
+import br.com.movieapp.core.presentation.navigation.currentRoute
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -17,7 +19,9 @@ fun MainScreen(
 ) {
     Scaffold (
         bottomBar = {
-            BottomNavigationBar(navController = navController)
+            // hide bottom nav when user enters in detail screen
+            if (currentRoute(navController) != DetailScreenNav.DetailScreen.route)
+                BottomNavigationBar(navController = navController)
         },
         content = { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {

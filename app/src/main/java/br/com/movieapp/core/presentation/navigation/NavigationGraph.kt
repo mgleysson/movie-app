@@ -14,7 +14,6 @@ import br.com.movieapp.movie_favorite_feature.presentation.MovieFavoriteScreen
 import br.com.movieapp.movie_favorite_feature.presentation.MovieFavoriteViewModel
 import br.com.movieapp.movie_popular_feature.presentation.screen.MoviePopularScreen
 import br.com.movieapp.movie_popular_feature.presentation.viewmodel.MoviePopularViewModel
-import br.com.movieapp.search_movie_feature.presentation.models.MovieSearchEvent
 import br.com.movieapp.search_movie_feature.presentation.screen.MovieSearchScreen
 import br.com.movieapp.search_movie_feature.presentation.viewmodel.MovieSearchViewModel
 
@@ -31,7 +30,7 @@ fun NavigationGraph (
             MoviePopularScreen(
                 uiState = viewModel.uiState,
                 navigateToDetailMovie = { movieId ->
-                    navController.navigate(BottomNavItem.MovieDetail.passMovieId(movieId))
+                    navController.navigate(DetailScreenNav.DetailScreen.passMovieId(movieId))
                 }
             )
         }
@@ -44,7 +43,7 @@ fun NavigationGraph (
                 onSearchEvent = viewModel::search,
                 onFetch = viewModel::fetch,
                 navigateToDetailMovie = { movieId ->
-                    navController.navigate(BottomNavItem.MovieDetail.passMovieId(movieId))
+                    navController.navigate(DetailScreenNav.DetailScreen.passMovieId(movieId))
                 }
             )
         }
@@ -55,13 +54,13 @@ fun NavigationGraph (
             MovieFavoriteScreen(
                 uiState = uiState,
                 navigateToDetailMovie = {
-                    navController.navigate(BottomNavItem.MovieDetail.passMovieId(movieId = it))
+                    navController.navigate(DetailScreenNav.DetailScreen.passMovieId(movieId = it))
                 }
             )
         }
 
         composable(
-            route = BottomNavItem.MovieDetail.route,
+            route = DetailScreenNav.DetailScreen.route,
             arguments = listOf(
                 navArgument(Constants.MOVIE_DETAIL_ARGUMENT_KEY) {
                     type = NavType.IntType
