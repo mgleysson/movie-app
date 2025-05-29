@@ -1,20 +1,13 @@
 package br.com.movieapp.movie_detail_feature.presentation.screen
 
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.paging.compose.collectAsLazyPagingItems
 import br.com.movieapp.R
 import br.com.movieapp.core.domain.model.Movie
+import br.com.movieapp.core.presentation.components.common.MovieAppBar
 import br.com.movieapp.movie_detail_feature.presentation.components.MovieDetailContent
 import br.com.movieapp.movie_detail_feature.presentation.state.MovieDetailState
-import br.com.movieapp.movie_detail_feature.presentation.viewmodel.MovieDetailEvent
-import br.com.movieapp.ui.theme.black
-import br.com.movieapp.ui.theme.white
 
 @Composable
 fun MovieDetailScreen(
@@ -26,11 +19,8 @@ fun MovieDetailScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = stringResource(R.string.detail_movie), color = white)
-                },
-                backgroundColor = black
+            MovieAppBar(
+                title = R.string.detail_movie
             )
         },
         content = { paddingValues ->

@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import br.com.movieapp.R
+import br.com.movieapp.core.presentation.components.common.AsyncImageUrl
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
@@ -54,20 +55,13 @@ fun MovieItem(
             elevation = 8.dp
         ) {
             Box {
-                AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(imageUrl)
-                        .crossfade(true)
-                        .error(R.drawable.ic_error_image)
-                        .placeholder(R.drawable.ic_placeholder)
-                        .build(),
-                    contentDescription = "",
-                    contentScale = ContentScale.FillHeight,
+                AsyncImageUrl(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.BottomCenter)
                         .background(Color.Black)
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(8.dp)),
+                    imageUrl = imageUrl
                 )
             }
 
